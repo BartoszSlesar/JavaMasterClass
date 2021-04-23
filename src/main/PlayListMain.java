@@ -32,6 +32,7 @@ public class PlayListMain {
         Album alb = null;
         for (Album album : albumList) {
             System.out.println(index + ": " + album.getAlbumName());
+            index++;
         }
         int select = scan.nextInt() - 1;
         if (select >= 0 && select <= albumList.size()) {
@@ -42,22 +43,24 @@ public class PlayListMain {
         return alb;
     }
 
-    private static void addSongToPlayList(LinkedList<Song> playlist) {
+    private static boolean addSongToPlayList(LinkedList<Song> playlist) {
         System.out.println("Please select Album");
+        boolean result = false;
         Album album = selectAlbum();
         if (album != null) {
             System.out.println("Please select \n 1:Add Song By Title\n 2:Add Song by Track Number");
             int select = scan.nextInt();
             switch (select) {
                 case 1:
+                    scan.nextLine();
                     String songTitle = scan.nextLine();
-                    album.addSongToPlaylist(songTitle, playlist);
+                    result = album.addSongToPlaylist(songTitle, playlist);
                     break;
                 case 2:
                     album.listAllSongs();
                     System.out.println("Please select track number");
                     int index = scan.nextInt();
-                    album.addSongToPlaylist(index, playlist);
+                    result = album.addSongToPlaylist(index, playlist);
                     break;
                 default:
                     break;
@@ -67,12 +70,18 @@ public class PlayListMain {
             System.out.println("Song not added to playlist");
         }
 
+        return result;
+
     }
 
     private static void listSongs(LinkedList<Song> playList) {
-        Iterator<Song> iterator = playList.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        if (playList.isEmpty()) {
+            System.out.println("There is no songs in your playlist");
+        } else {
+            Iterator<Song> iterator = playList.iterator();
+            while (iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }
         }
     }
 
@@ -91,14 +100,34 @@ public class PlayListMain {
                     printOptions();
                     break;
                 case 2:
-                    addSongToPlayList(playList);
+                    if (addSongToPlayList(playList)) {
+                        playListIterator = playList.listIterator();
+                    }
                     break;
                 case 3:
                     listSongs(playList);
                     break;
                 case 4:
+                    if (!forwoard) {
+                        playListIterator.next();
+                    }
+                    forwoard = true;
+                    if (playListIterator.hasNext()) {
+                        System.out.println(playListIterator.next().toString());
+                    } else {
+                        System.out.println("At the end of play list");
+                    }
                     break;
                 case 5:
+                    if (forwoard) {
+                        playListIterator.previous();
+                    }
+                    forwoard = false;
+                    if (playListIterator.hasPrevious()) {
+                        System.out.println(playListIterator.previous());
+                    } else {
+                        System.out.println("At the beginning of play list");
+                    }
                     break;
                 case 6:
                     break;
@@ -121,8 +150,8 @@ public class PlayListMain {
         album1.addSong("Giorgio By Moroder", 9.04);
         album1.addSong("Within", 3.48);
         album1.addSong("Instant Crush", 5.37);
-        album1.addSong("Lose Yourself to Dance ", 5.53);
-        album1.addSong("Touch (feat. Paul Williams);", 8.18);
+        album1.addSong("Lose Yourself to Dance", 5.53);
+        album1.addSong("Touch", 8.18);
         album1.addSong("Get Lucky", 6.07);
         album1.addSong("Beyond", 4.50);
         album1.addSong("Motherboard", 5.41);
@@ -131,19 +160,19 @@ public class PlayListMain {
         album1.addSong("Contact", 6.21);
 
         Album album2 = new Album("Meteora", "LinkinPark");
-        album2.addSong("Foreword ", 0.17);
-        album2.addSong("Don't Stay ", 3.07);
-        album2.addSong("Somewhere I Belong ", 3.33);
-        album2.addSong("Lying from You ", 2.55);
-        album2.addSong("Hit the Floor ", 2.44);
-        album2.addSong("Easier to Run ", 3.24);
-        album2.addSong("Faint ", 2.42);
+        album2.addSong("Foreword", 0.17);
+        album2.addSong("Don't Stay", 3.07);
+        album2.addSong("Somewhere I Belong", 3.33);
+        album2.addSong("Lying from You", 2.55);
+        album2.addSong("Hit the Floor", 2.44);
+        album2.addSong("Easier to Run", 3.24);
+        album2.addSong("Faint", 2.42);
         album2.addSong("Figure.09 ", 3.17);
-        album2.addSong("Breaking the Habit ", 3.16);
-        album2.addSong("From the Inside ", 2.53);
-        album2.addSong("Nobody's Listening ", 2.58);
-        album2.addSong("Session ", 2.23);
-        album2.addSong("Numb ", 3.05);
+        album2.addSong("Breaking the Habit", 3.16);
+        album2.addSong("From the Inside", 2.53);
+        album2.addSong("Nobody's Listening", 2.58);
+        album2.addSong("Session", 2.23);
+        album2.addSong("Numb", 3.05);
 
         ArrayList<Album> arrayList = new ArrayList<>();
         arrayList.add(album1);
