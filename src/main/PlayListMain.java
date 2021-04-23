@@ -152,28 +152,18 @@ public class PlayListMain {
                     break;
                 case 7:
                     if (!playList.isEmpty()) {
-                        if (forwoard) {
-                            playListIterator.remove();
-                            forwoard = true;
-                            if (playListIterator.hasNext()) {
-                                currentSong = playListIterator.next();
-                            } else if (playListIterator.hasPrevious()) {
-                                currentSong = playListIterator.previous();
-                            }
-                        } else {
-                            playListIterator.remove();
-                            forwoard = false;
-                            if (playListIterator.hasPrevious()) {
-                                currentSong = playListIterator.previous();
-                            } else if (playListIterator.hasNext()) {
-                                currentSong = playListIterator.next();
-                            }
+                        playListIterator.remove();
+                        if (playListIterator.hasNext()) {
+                            currentSong = playListIterator.next();
+                        } else if (playListIterator.hasPrevious()) {
+                            currentSong = playListIterator.previous();
+                        }
 
-                        }
-                        if (playList.isEmpty()) {
-                            currentSong = null;
-                        }
                     }
+                    if (playList.isEmpty()) {
+                        currentSong = null;
+                    }
+
 
                     break;
                 case 8:
@@ -184,6 +174,7 @@ public class PlayListMain {
                     break;
             }
         }
+
     }
 
 
