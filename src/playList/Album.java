@@ -32,7 +32,7 @@ public class Album {
             this.songList.add(new Song(title, duration));
             added = true;
         } else {
-            System.out.println("Song already exist in playlist");
+            System.out.println("Song already exist in Album");
         }
         return added;
 
