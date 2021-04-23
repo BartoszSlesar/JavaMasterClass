@@ -3,10 +3,7 @@ package main;
 import playList.Album;
 import playList.Song;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class PlayListMain {
     private static Scanner scan = new Scanner(System.in);
@@ -72,8 +69,11 @@ public class PlayListMain {
 
     }
 
-    private static void listSongs(LinkedList<Song> playList){
-        
+    private static void listSongs(LinkedList<Song> playList) {
+        Iterator<Song> iterator = playList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 
     private static void play(LinkedList<Song> playList) {
