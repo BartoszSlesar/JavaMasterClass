@@ -86,13 +86,21 @@ public class PlayListMain {
     }
 
     private static void play(LinkedList<Song> playList) {
-
+        Song currentSong = null;
         boolean quit = false;
         ListIterator<Song> playListIterator = playList.listIterator();
-        boolean forwoard = true;
+        boolean forwoard = false;
+        if (!playList.isEmpty()) {
+            currentSong = playListIterator.next();
+            forwoard = true;
+        }
+
         int select = 0;
         printOptions();
         while (!quit) {
+            if (currentSong != null) {
+                System.out.println("Curently playing: " + currentSong.toString());
+            }
             System.out.println("Please select option: ");
             select = scan.nextInt();
             switch (select) {
@@ -102,6 +110,8 @@ public class PlayListMain {
                 case 2:
                     if (addSongToPlayList(playList)) {
                         playListIterator = playList.listIterator();
+                        currentSong = playListIterator.next();
+                        forwoard = true;
                     }
                     break;
                 case 3:
@@ -110,10 +120,11 @@ public class PlayListMain {
                 case 4:
                     if (!forwoard) {
                         playListIterator.next();
+                        forwoard = true;
                     }
-                    forwoard = true;
                     if (playListIterator.hasNext()) {
-                        System.out.println(playListIterator.next().toString());
+                        currentSong = playListIterator.next();
+                        System.out.println(currentSong);
                     } else {
                         System.out.println("At the end of play list");
                     }
@@ -121,17 +132,49 @@ public class PlayListMain {
                 case 5:
                     if (forwoard) {
                         playListIterator.previous();
+                        forwoard = false;
                     }
-                    forwoard = false;
                     if (playListIterator.hasPrevious()) {
-                        System.out.println(playListIterator.previous());
+                        currentSong = playListIterator.previous();
+                        System.out.println(currentSong);
                     } else {
                         System.out.println("At the beginning of play list");
                     }
                     break;
                 case 6:
+                    if (!forwoard) {
+                        System.out.println(playListIterator.next());
+                        forwoard = true;
+                    } else {
+                        System.out.println(playListIterator.previous());
+                        forwoard = false;
+                    }
                     break;
                 case 7:
+                    if (!playList.isEmpty()) {
+                        if (forwoard) {
+                            playListIterator.remove();
+                            forwoard = true;
+                            if (playListIterator.hasNext()) {
+                                currentSong = playListIterator.next();
+                            } else if (playListIterator.hasPrevious()) {
+                                currentSong = playListIterator.previous();
+                            }
+                        } else {
+                            playListIterator.remove();
+                            forwoard = false;
+                            if (playListIterator.hasPrevious()) {
+                                currentSong = playListIterator.previous();
+                            } else if (playListIterator.hasNext()) {
+                                currentSong = playListIterator.next();
+                            }
+
+                        }
+                        if (playList.isEmpty()) {
+                            currentSong = null;
+                        }
+                    }
+
                     break;
                 case 8:
                     quit = true;
