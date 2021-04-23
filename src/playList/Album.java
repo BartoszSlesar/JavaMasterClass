@@ -51,8 +51,9 @@ public class Album {
         return null;
     }
 
-    public void listAllSong() {
+    public void listAllSongs() {
         int index = 1;
+        System.out.println(albumName + ":");
         for (Song song : songList) {
             System.out.println("Track " + index + ": " + song.toString());
             index++;

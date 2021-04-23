@@ -33,6 +33,9 @@ public class AlbumTest {
         album2.addSong("Session ", 2.23);
         album2.addSong("Numb ", 3.05);
 
+        album1.listAllSongs();
+        System.out.println("================================================================");
+        album2.listAllSongs();
 
 
     }
