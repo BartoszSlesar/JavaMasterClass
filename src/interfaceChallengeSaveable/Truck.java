@@ -6,6 +6,10 @@ public class Truck extends Vehicle implements ISaveable {
 
     private String truckType;
 
+    public Truck(String name, int numberOfTires, String truckType) {
+        this(name, numberOfTires, false, "", truckType);
+    }
+
     public Truck(String name, int numberOfTires, boolean electric, String color, String truckType) {
         super(name, numberOfTires, electric, color);
         this.truckType = truckType;
