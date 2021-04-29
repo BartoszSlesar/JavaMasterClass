@@ -1,9 +1,11 @@
 package interfaceChallengeSaveable;
 
+import interfaceChallengeSaveable.utils.ReadWriteObject;
+
 import java.util.List;
 
 public interface ISaveable {
-    List<String> saveData();
+    ReadWriteObject saveData();
 
-    void populateObject();
+    void populateObject(ReadWriteObject object);
 }

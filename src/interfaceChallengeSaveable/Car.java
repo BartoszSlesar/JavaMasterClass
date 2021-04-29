@@ -1,5 +1,7 @@
 package interfaceChallengeSaveable;
 
+import interfaceChallengeSaveable.utils.ReadWriteObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,12 +44,12 @@ public class Car extends Vehicle implements ISaveable {
 
 
     @Override
-    public List<String> saveData() {
+    public ReadWriteObject saveData() {
         return null;
     }
 
     @Override
-    public void populateObject() {
+    public void populateObject(ReadWriteObject object) {
 
     }
 }

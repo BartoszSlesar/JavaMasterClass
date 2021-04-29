@@ -14,6 +14,10 @@ public class Vehicle {
         this.color = color;
     }
 
+    public Vehicle() {
+
+    }
+
     public String getName() {
         return name;
     }

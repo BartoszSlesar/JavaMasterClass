@@ -1,5 +1,7 @@
 package interfaceChallengeSaveable.ReadWrite;
 
+import interfaceChallengeSaveable.utils.ReadWriteObject;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,11 +13,11 @@ public class SaveObjectToFile {
     private static final String RESOURCE_PATH = "resource/interfaceChallengeResource/";
 
 
-    public static boolean saveToFile(List<String> values, String fileName) {
-        return saveToFile(values, RESOURCE_PATH, fileName);
+    public static boolean saveToFile(ReadWriteObject readWriteObject, String fileName) {
+        return saveToFile(readWriteObject, RESOURCE_PATH, fileName);
     }
 
-    public static boolean saveToFile(List<String> values, String path, String fileName) {
+    public static boolean saveToFile(ReadWriteObject readWriteObject, String path, String fileName) {
 
         fileName = CheckExtension.checkExtension(fileName);
         String fName = path + fileName;
@@ -32,8 +34,9 @@ public class SaveObjectToFile {
 
         try {
             FileWriter fileWriter = new FileWriter(fName);
-            int index = 0;
-            for (String val : values) {
+            fileWriter.write(0 + ":" + readWriteObject.getClassName() + "\n");
+            int index = 1;
+            for (String val : readWriteObject.getValues()) {
                 fileWriter.write(index + ":" + val + "\n");
                 index++;
             }

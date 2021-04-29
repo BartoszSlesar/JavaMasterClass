@@ -1,5 +1,0 @@
-0:Mercedes
-1:8
-2:false
-3:Red
-4:Tank Truck
