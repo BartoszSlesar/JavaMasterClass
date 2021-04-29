@@ -21,7 +21,7 @@ public class SaveObjectToFile {
         String fName = path + "/" + fileName;
         File file = new File(fName);
         if (file.exists()) {
-            System.out.println("Fuck");
+
         }
         return false;
     }
