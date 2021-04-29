@@ -1,6 +1,7 @@
 package interfaceChallengeSaveable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Motorcycle extends Vehicle implements ISaveable {
 
@@ -12,7 +13,7 @@ public class Motorcycle extends Vehicle implements ISaveable {
     }
 
     @Override
-    public ArrayList<String> saveData() {
+    public List<String> saveData() {
         return null;
     }
 

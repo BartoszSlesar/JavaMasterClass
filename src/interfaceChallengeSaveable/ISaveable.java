@@ -1,9 +1,9 @@
 package interfaceChallengeSaveable;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ISaveable {
-    ArrayList<String> saveData();
+    List<String> saveData();
 
     void populateObject();
 }
