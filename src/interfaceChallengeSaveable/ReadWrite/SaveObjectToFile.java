@@ -1,5 +1,6 @@
 package interfaceChallengeSaveable.ReadWrite;
 
+import interfaceChallengeSaveable.ISaveable;
 import interfaceChallengeSaveable.utils.ReadWriteObject;
 
 import java.io.File;
@@ -13,12 +14,12 @@ public class SaveObjectToFile {
     private static final String RESOURCE_PATH = "resource/interfaceChallengeResource/";
 
 
-    public static boolean saveToFile(ReadWriteObject readWriteObject, String fileName) {
-        return saveToFile(readWriteObject, RESOURCE_PATH, fileName);
+    public static boolean saveToFile(ISaveable objectToSave, String fileName) {
+        return saveToFile(objectToSave, RESOURCE_PATH, fileName);
     }
 
-    public static boolean saveToFile(ReadWriteObject readWriteObject, String path, String fileName) {
-
+    public static boolean saveToFile(ISaveable objectToSave, String path, String fileName) {
+        ReadWriteObject readWriteObject = objectToSave.saveData();
         fileName = CheckExtension.checkExtension(fileName);
         String fName = path + fileName;
         File file = new File(fName);

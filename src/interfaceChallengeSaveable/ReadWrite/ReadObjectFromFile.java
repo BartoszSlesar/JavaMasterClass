@@ -1,5 +1,6 @@
 package interfaceChallengeSaveable.ReadWrite;
 
+import interfaceChallengeSaveable.ISaveable;
 import interfaceChallengeSaveable.utils.ReadWriteObject;
 
 import java.io.File;
@@ -12,7 +13,7 @@ public class ReadObjectFromFile {
 
     private static final String RESOURCE_PATH = "resource/interfaceChallengeResource/";
 
-    public static ReadWriteObject readObject(String fileName) {
+    public static ISaveable readObject(ISaveable object, String fileName) {
         List<String> values = new ArrayList<String>();
         fileName = CheckExtension.checkExtension(fileName);
         String filePath = RESOURCE_PATH + fileName;
@@ -34,8 +35,8 @@ public class ReadObjectFromFile {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        return new ReadWriteObject(values.remove(0), values);
+        object.populateObject(new ReadWriteObject(values.remove(0), values));
+        return object;
     }
 
 

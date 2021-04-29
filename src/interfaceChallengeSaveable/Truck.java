@@ -47,13 +47,17 @@ public class Truck extends Vehicle implements ISaveable {
 
     @Override
     public void populateObject(ReadWriteObject object) {
-        if (object.getClassName().equals(Truck.class.toString())) {
-            List<String> values = object.getValues();
-            super.setName(values.get(0));
-            super.setNumberOfTires(Integer.parseInt(values.get(1)));
-            super.setElectric(values.get(2).equals("True"));
-            super.setColor(values.get(3));
-            this.truckType = values.get(4);
+        if (object == null) {
+            System.out.println("Null object was passed");
+        } else {
+            if (object.getClassName().equals(Truck.class.toString())) {
+                List<String> values = object.getValues();
+                super.setName(values.get(0));
+                super.setNumberOfTires(Integer.parseInt(values.get(1)));
+                super.setElectric(values.get(2).equals("True"));
+                super.setColor(values.get(3));
+                this.truckType = values.get(4);
+            }
         }
     }
 
