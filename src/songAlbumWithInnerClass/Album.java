@@ -63,11 +63,11 @@ public class Album {
     private class SongList {
         private List<Song> songList;
 
-        public SongList() {
+        private SongList() {
             this.songList = new ArrayList<>();
         }
 
-        public Song getSong(int trackNumber) {
+        private Song getSong(int trackNumber) {
             return this.songList.get(trackNumber);
         }
 
@@ -83,7 +83,7 @@ public class Album {
             return null;
         }
 
-        public void listAllSongs() {
+        private void listAllSongs() {
             int index = 1;
             System.out.println(albumName + ":");
             for (playList.Song song : songList) {
@@ -92,7 +92,7 @@ public class Album {
             }
         }
 
-        public boolean addSong(String title, double duration) {
+        private boolean addSong(String title, double duration) {
             boolean added = false;
             if (title == null || title.equals("")) {
                 System.out.println("Please add song title");
@@ -109,7 +109,7 @@ public class Album {
 
         }
 
-        public int getAlbumSize() {
+        private int getAlbumSize() {
             return this.songList.size();
         }
 
