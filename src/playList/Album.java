@@ -1,7 +1,5 @@
 package playList;
 
-import songAlbumWithInnerClass.Song;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 

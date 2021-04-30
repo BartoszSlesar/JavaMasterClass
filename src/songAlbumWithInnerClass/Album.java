@@ -2,7 +2,6 @@ package songAlbumWithInnerClass;
 
 import playList.Song;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,20 +61,20 @@ public class Album {
     }
 
     private class SongList {
-        private List<playList.Song> songList;
+        private List<Song> songList;
 
         public SongList() {
             this.songList = new ArrayList<>();
         }
 
-        public playList.Song getSong(int trackNumber) {
+        public Song getSong(int trackNumber) {
             return this.songList.get(trackNumber);
         }
 
 
-        private playList.Song findSong(String title) {
+        private Song findSong(String title) {
 
-            for (playList.Song s : this.songList) {
+            for (Song s : this.songList) {
                 if (s.getTitle().equals(title)) {
                     return s;
                 }
@@ -99,7 +98,7 @@ public class Album {
                 System.out.println("Please add song title");
                 return false;
             }
-            playList.Song song = findSong(title);
+            Song song = findSong(title);
             if (song == null) {
                 this.songList.add(new Song(title, duration));
                 added = true;
