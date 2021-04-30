@@ -11,8 +11,8 @@ public class interfaceChallengeMain {
 
 //        ISaveable saveable = new Truck("Mercedes", 8, false, "Red", "Tank Truck");
 //        SaveObjectToFile.saveToFile(saveable, "testFileName");
-//        ISaveable truck = ReadObjectFromFile.readObject(new Truck(), "testFileName");
-//        System.out.println(truck.toString());
+        ISaveable truck = ReadObjectFromFile.readObject(new Truck(), "testFileName");
+        System.out.println(truck.toString());
 
 
     }

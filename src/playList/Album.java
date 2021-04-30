@@ -3,16 +3,17 @@ package playList;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Album {
     private String albumName;
     private String band;
-    private ArrayList<Song> songList;
+    private SongList albumsSongs;
 
     public Album(String albumName, String band) {
         this.albumName = albumName;
         this.band = band;
-        this.songList = new ArrayList<>();
+        this.albumsSongs = new SongList();
     }
 
     public String getAlbumName() {
@@ -24,44 +25,17 @@ public class Album {
     }
 
     public boolean addSong(String title, double duration) {
-        boolean added = false;
-        if (title == null || title.equals("")) {
-            System.out.println("Please add song title");
-            return false;
-        }
-        Song song = findSong(title);
-        if (song == null) {
-            this.songList.add(new Song(title, duration));
-            added = true;
-        } else {
-            System.out.println("Song already exist in Album");
-        }
-        return added;
+        return this.albumsSongs.addSong(title, duration);
 
     }
 
-    private Song findSong(String title) {
-
-        for (Song s : this.songList) {
-            if (s.getTitle().equals(title)) {
-                return s;
-            }
-
-        }
-        return null;
-    }
 
     public void listAllSongs() {
-        int index = 1;
-        System.out.println(albumName + ":");
-        for (Song song : songList) {
-            System.out.println("Track " + index + ": " + song.toString());
-            index++;
-        }
+        this.albumsSongs.listAllSongs();
     }
 
     public boolean addSongToPlaylist(String songTitle, LinkedList<Song> playlist) {
-        Song song = findSong(songTitle);
+        Song song = this.albumsSongs.findSong(songTitle);
         if (song == null) {
             System.out.println(songTitle + " Do not exist in this album");
             return false;
@@ -74,8 +48,8 @@ public class Album {
     public boolean addSongToPlaylist(int trackNumber, LinkedList<Song> playlist) {
         boolean result = false;
         int index = trackNumber - 1;
-        if ((index >= 0) && (index <= songList.size())) {
-            Song song = songList.get(index);
+        if ((index >= 0) && (index <= this.albumsSongs.getAlbumSize())) {
+            Song song = this.albumsSongs.getSong(index);
             playlist.addFirst(song);
             result = true;
         } else {
@@ -83,6 +57,62 @@ public class Album {
         }
 
         return result;
+    }
+
+    private class SongList {
+        private List<Song> songList;
+
+        public SongList() {
+            this.songList = new ArrayList<>();
+        }
+
+        public Song getSong(int trackNumber) {
+            return this.songList.get(trackNumber);
+        }
+
+
+        private Song findSong(String title) {
+
+            for (Song s : this.songList) {
+                if (s.getTitle().equals(title)) {
+                    return s;
+                }
+
+            }
+            return null;
+        }
+
+        public void listAllSongs() {
+            int index = 1;
+            System.out.println(albumName + ":");
+            for (Song song : songList) {
+                System.out.println("Track " + index + ": " + song.toString());
+                index++;
+            }
+        }
+
+        public boolean addSong(String title, double duration) {
+            boolean added = false;
+            if (title == null || title.equals("")) {
+                System.out.println("Please add song title");
+                return false;
+            }
+            Song song = findSong(title);
+            if (song == null) {
+                this.songList.add(new Song(title, duration));
+                added = true;
+            } else {
+                System.out.println("Song already exist in Album");
+            }
+            return added;
+
+        }
+
+        public int getAlbumSize() {
+            return this.songList.size();
+        }
+
+
     }
 
 
