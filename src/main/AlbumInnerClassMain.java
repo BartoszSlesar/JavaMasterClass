@@ -1,6 +1,6 @@
 package main;
 
-import playList.Album;
+import songAlbumWithInnerClass.Album;
 import playList.Song;
 
 import java.util.*;

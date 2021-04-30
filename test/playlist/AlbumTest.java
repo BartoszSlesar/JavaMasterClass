@@ -1,6 +1,6 @@
 package playlist;
 
-import playList.Album;
+import songAlbumWithInnerClass.Album;
 
 public class AlbumTest {
     public static void main(String[] args) {
