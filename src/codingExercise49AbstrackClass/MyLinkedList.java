@@ -10,16 +10,19 @@ public class MyLinkedList implements NodeList {
 
     @Override
     public ListItem getRoot() {
-        return null;
+        return this.root;
     }
 
     @Override
     public boolean addItem(ListItem item) {
-        boolean result = false;
+        if (item == null) {
+            return false;
+        }
         if (this.root == null) {
             this.root = item;
-            result = true;
+            return true;
         }
+
         ListItem temp = this.root;
         while (temp != null) {
             int compare = temp.compareTo(item);
@@ -47,16 +50,44 @@ public class MyLinkedList implements NodeList {
 
         }
 
-        return result;
+        return false;
     }
 
     @Override
-    public ListItem removeItem(ListItem item) {
-        return null;
+    public boolean removeItem(ListItem item) {
+        if (item == null || this.root == null) {
+            return false;
+        }
+        ListItem temp = this.root;
+        while (temp != null) {
+            int compare = temp.compareTo(item);
+            switch (compare) {
+                case 0:
+                    temp.previous().setNext(temp.next());
+                    if (temp.next() != null) {
+                        temp.next().setPrevious(temp.previous());
+                    }
+                    return true;
+                case -1:
+                    temp = temp.next();
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        return false;
     }
 
     @Override
-    public void traverse() {
-
+    public void traverse(ListItem root) {
+        if (root == null) {
+            System.out.println("The list is empty");
+        } else {
+            while (root != null) {
+                System.out.println(root.getValue());
+                root = root.next();
+            }
+        }
     }
 }
