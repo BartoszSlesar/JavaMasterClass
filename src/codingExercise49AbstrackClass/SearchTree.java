@@ -52,39 +52,47 @@ public class SearchTree implements NodeList {
 
     private void performRemoval(ListItem item, ListItem parent) {
         if (item.next() != null && item.previous() != null) {
-            ListItem parentLeft = item.next();
-            ListItem parentLeftMin = parentLeft;
-            while (parentLeftMin.previous() != null) {
-                parentLeft = parentLeftMin;
-                parentLeftMin = parentLeftMin.previous();
+            ListItem parentLeft = item;
+            ListItem leftMin = parentLeft.next();
+            while (leftMin.previous() != null) {
+                parentLeft = leftMin;
+                leftMin = leftMin.previous();
             }
-            if (parent.next() == item) {
-                parent.next().setValue(parentLeftMin.getValue());
 
+            item.setValue(leftMin.getValue());
+
+            if (parentLeft == item) {
+                item.setNext(leftMin.next());
             } else {
-                parent.previous().setValue(parentLeftMin.getValue());
-
+                parentLeft.setPrevious(leftMin.next());
             }
-            parentLeft.setPrevious(null);
+
 
         } else if (item.next() != null && item.previous() == null) {
             if (parent.next() == item) {
                 parent.setNext(item.next());
-            } else {
+            } else if (parent.previous() == item) {
                 parent.setPrevious(item.next());
+            } else {
+                this.root = parent.next();
             }
 
         } else if (item.previous() != null && item.next() == null) {
             if (parent.next() == item) {
                 parent.setNext(item.previous());
-            } else {
+            } else if (parent.previous() == item) {
                 parent.setPrevious(item.previous());
+            } else {
+                this.root = item.previous();
             }
         } else {
+
             if (parent.next() == item) {
                 parent.setNext(null);
-            } else {
+            } else if (parent.previous() == item) {
                 parent.setPrevious(null);
+            } else {
+                this.root = null;
             }
         }
     }
@@ -123,6 +131,10 @@ public class SearchTree implements NodeList {
 
     @Override
     public void traverse(ListItem root) {
-
+        if (root != null) {
+            traverse(root.previous());
+            System.out.println(root.getValue());
+            traverse(root.next());
+        }
     }
 }

@@ -33,8 +33,14 @@ public class MyLinkedList implements NodeList {
                 case 1:
 //                    item was added
                     ListItem tempPrev = temp.previous();
-                    tempPrev.setNext(item).setPrevious(tempPrev);
-                    item.setNext(temp).setPrevious(item);
+                    if (tempPrev != null) {
+                        tempPrev.setNext(item).setPrevious(tempPrev);
+                        item.setNext(temp).setPrevious(item);
+                    } else {
+                        item.setNext(temp).setPrevious(item);
+                        this.root = item;
+                    }
+
                     return true;
                 default:
 //                    currentItem is less then item, so check further
@@ -63,9 +69,18 @@ public class MyLinkedList implements NodeList {
             int compare = temp.compareTo(item);
             switch (compare) {
                 case 0:
-                    temp.previous().setNext(temp.next());
-                    if (temp.next() != null) {
-                        temp.next().setPrevious(temp.previous());
+                    ListItem tempPrev = temp.previous();
+                    if (tempPrev != null) {
+                        tempPrev.setNext(temp.next());
+                        if (temp.next() != null) {
+                            temp.next().setPrevious(tempPrev);
+                        }
+                    } else {
+                        this.root = temp.next();
+                        if (this.root != null) {
+                            this.root.setPrevious(null);
+                        }
+
                     }
                     return true;
                 case -1:
