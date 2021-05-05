@@ -15,7 +15,7 @@ public abstract class ListItem {
 
     abstract ListItem previous();
 
-    abstract ListItem SetPrevious(ListItem leftLink);
+    abstract ListItem setPrevious(ListItem leftLink);
 
     abstract int compareTo(ListItem listItem);
 

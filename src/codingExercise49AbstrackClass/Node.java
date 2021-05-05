@@ -24,17 +24,26 @@ public class Node extends ListItem {
     }
 
     @Override
-    ListItem SetPrevious(ListItem leftLink) {
+    ListItem setPrevious(ListItem leftLink) {
         this.leftLink = leftLink;
         return leftLink;
     }
 
     @Override
     int compareTo(ListItem listItem) {
+        int result = 0;
         if (listItem == null) {
-            return 1;
+            return 0;
         }
+
         String val = (String) this.value;
-        return val.compareTo((String) listItem.getValue());
+        int compare = val.compareTo((String) listItem.getValue());
+        if (compare > 0) {
+            result = 1;
+        } else if (compare < 0) {
+            result = -1;
+        }
+
+        return result;
     }
 }
