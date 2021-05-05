@@ -11,11 +11,11 @@ public abstract class ListItem {
 
     abstract ListItem next();
 
-    abstract ListItem setNext();
+    abstract ListItem setNext(ListItem rightLink);
 
     abstract ListItem previous();
 
-    abstract ListItem SetPrevious();
+    abstract ListItem SetPrevious(ListItem leftLink);
 
     abstract int compareTo(ListItem listItem);
 
